@@ -1,116 +1,26 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
-import React, { Component } from 'react';
-import Icon from 'react-native-vector-icons/MaterialIcons';
-import {
-  Platform,
-  StyleSheet,
-  Image,
-  Text,
-  FlatList,
-  TouchableOpacity,
-  View
-} from 'react-native';
-import VideoItem from './src/components/Video/videoItem';
-import data from './src/data/data.json';
-
-export default class App extends Component {
-  render() {
+import React, { Component } from 'react'
+import MapView, { PROVIDER_GOOGLE } from 'react-native-maps'
+import { View, StyleSheet } from 'react-native'
+class MapTest extends Component {
+  render () {
     return (
       <View style={styles.container}>
-
-        <View style={styles.navBar}>
-        <TouchableOpacity>
-        <Image source={require('./src/images/logo-jsmu/icon-jsmu.jpg')} style={{ width: 50, height: 50 }} />
-        </TouchableOpacity>
-        <View style={styles.rightNav}>
-        <TouchableOpacity>
-              <Icon style={styles.navItem} name="search" size={25} />
-            </TouchableOpacity>
-            <TouchableOpacity>
-            <Icon style={styles.navItem} name="account-circle" size={25} />
-        </TouchableOpacity>
-        </View>
-        </View>
-
-        <View style={styles.body}>
-          <FlatList
-          data={data.items}
-          renderItem={(video)=><VideoItem video={video.item} />}
-          keyExtractor={(item)=>item.id}
-          ItemSeparatorComponent={()=><View style={{height:0.5,backgroundColor:'#E5E5E5'}}/>}
-           />
-        </View>
-
-        <View style={styles.tabBar}>
-          <TouchableOpacity style={styles.tabItem}>
-            <Icon name="home" size={25}/>
-            <Text style={styles.tabTitle}>Home</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.tabItem}>
-            <Icon name="whatshot" size={25} />
-            <Text style={styles.tabTitle}>Trending</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.tabItem}>
-            <Icon name="place" size={25} />
-            <Text style={styles.tabTitle}>Maps</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.tabItem}>
-            <Icon name="subscriptions" size={25} />
-            <Text style={styles.tabTitle}>Subscriptions</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.tabItem}>
-            <Icon name="folder" size={25} />
-            <Text style={styles.tabTitle}>Library</Text>
-          </TouchableOpacity>
-        </View>
-        
+        <MapView
+          provider={PROVIDER_GOOGLE}
+          style={styles.map}
+          region={{
+            latitude: -6.146916,
+            longitude: 106.745490,
+            latitudeDelta: 0.015,
+            longitudeDelta: 0.0121,
+          }}
+        ></MapView>
       </View>
-    );
+    )   
   }
 }
-
 const styles = StyleSheet.create({
-  container: {
-    flex: 1, 
-  },
-  navBar: {
-    height: 55,
-    backgroundColor: 'white',
-    elevation: 3,
-    paddingHorizontal: 15,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between'
-  },
-  rightNav: {
-    flexDirection: 'row'
-  },
-  navItem: {
-    marginLeft: 25
-  },
-  body: {
-    flex: 1
-  },
-  tabBar: {
-    backgroundColor: 'white',
-    height: 60,
-    borderTopWidth: 0.5,
-    borderColor: '#E5E5E5',
-    flexDirection: 'row',
-    justifyContent: 'space-around'
-  },
-  tabItem: {
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  tabTitle: {
-    fontSize: 11,
-    color: '#3c3c3c',
-    paddingTop: 4
-  }
-});
+  container: { ... StyleSheet.absoluteFillObject },
+  map: { ...StyleSheet.absoluteFillObject }
+})
+export default MapTest
